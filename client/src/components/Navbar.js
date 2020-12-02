@@ -81,7 +81,7 @@ const NavBar = () => {
                     {renderList()}
                 </ul>
             </div>
-            <div id="modal1" className="modal " ref={searchModal} style={{color:"black"}}>
+            <div id="modal1" className={`${!state ? 'hidden' : '' } modal`} ref={searchModal} style={{color:"black"}}>
                 <div className="modal-content grey darken-4">
                     <input
                         type="text"
