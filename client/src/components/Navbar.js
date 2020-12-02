@@ -55,7 +55,6 @@ const NavBar = () => {
     }
 
     const fetchUsers = (query)=>{
-        console.log(query)
         setSearch(query)
         if(!query) return setUserDetails([])
         fetch('/search-users',{
