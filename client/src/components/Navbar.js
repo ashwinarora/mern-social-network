@@ -83,14 +83,16 @@ const NavBar = () => {
             </div>
             <div id="modal1" className={`${!state ? 'hidden' : '' } modal`} ref={searchModal} style={{color:"black"}}>
                 <div className="modal-content grey darken-4">
-                    <input
-                        type="text"
-                        className="white-text"
-                        placeholder="Search User Email"
-                        autoComplete="off"
-                        value={search}
-                        onChange={(e)=>fetchUsers(e.target.value)}
-                    />
+                    <form autoComplete="off">
+                        <input
+                            type="text"
+                            className="white-text"
+                            placeholder="Search User Email"
+                            autoComplete="off"
+                            value={search}
+                            onChange={(e)=>fetchUsers(e.target.value)}
+                        />
+                    </form>
                     <ul className="collection" style={{display: "flex", flexDirection: "column"}}>
                         {userDetails.map(item=>{
                             return (
