@@ -87,7 +87,7 @@ const NavBar = () => {
                         type="text"
                         className="white-text"
                         placeholder="Search User Email"
-                        autocomplete="off"
+                        autoComplete="off"
                         value={search}
                         onChange={(e)=>fetchUsers(e.target.value)}
                     />
