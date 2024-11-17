@@ -3,9 +3,9 @@ const app = express()
 require('dotenv').config()
 const PORT = process.env.PORT || 5000
 const mongoose = require('mongoose')
-const { MONGOURI } = require('./keys')
+const { MONGO_URI } = require('./keys')
 
-mongoose.connect(MONGOURI, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
