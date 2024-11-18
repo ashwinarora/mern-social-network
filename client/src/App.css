@@ -47,9 +47,11 @@ a{
 }
 
 .logo-image {
-  width: 15rem;
+  width: 4rem;
   height: auto;
   object-fit: scale-down;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .icon-div {
