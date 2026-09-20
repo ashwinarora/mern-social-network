@@ -214,44 +214,30 @@ const Profile = () => {
         {
         !!(user && data)
         ?
-        <div style={{
-            maxWidth: "60vw",
-            margin: "0px auto"
-        }}>
-            <div style={{
-                display: "flex",
-                justifyContent: "space-around",
-                margin: "18px 0px",
-                borderBottom:"1px solid grey"
-            }}>
-                <div>
-                    <img style={{ width: "160px", height: "160px", borderRadius: "80px", objectFit: "cover" }}
+        <div className="profile-page">
+            <div className="profile-card profile-head">
+                <div className="profile-avatar-wrap">
+                    <img className="profile-avatar" alt={user.name}
                         src={user.pic} />
                 </div>
-                <div className="white-text">
-                    <h4>{user.name}</h4>
-                    <h6>{user.email}</h6>
-                    <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        width: "108%"
-                    }}>
-                        <h6>{data.length} posts</h6>
-                        <h6>{user.followers.length} Followers</h6>
-                        <h6>{user.following.length} Follwing</h6>
+                <div className="profile-meta">
+                    <h4 className="profile-name">{user.name}</h4>
+                    <h6 className="profile-email">{user.email}</h6>
+                    <div className="profile-stats">
+                        <h6><b>{data.length}</b> posts</h6>
+                        <h6><b>{user.followers.length}</b> Followers</h6>
+                        <h6><b>{user.following.length}</b> Follwing</h6>
                     </div>
                     {
                         showFollow
                         ?
                         <button
-                            style={{margin: "10px"}}
-                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            className="btn waves-effect waves-light btn-primary follow-btn"
                             onClick={() => {followUser()}}
                         >Follow</button>
                         :
                         <button
-                            style={{margin: "10px"}}
-                            className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                            className="btn waves-effect waves-light btn-secondary follow-btn"
                             onClick={() => {unfollowUser()}}
                         >Unfollow</button>
                     }
@@ -267,32 +253,32 @@ const Profile = () => {
                 })
             }
             </div> */}
-            <div className="home">
+            <div className="home feed" data-empty="No posts from this user yet.">
             {
                 data.slice(0).reverse().map(item => {
                     return (
-                        <div className="card home-card grey darken-4" key={item._id}>
-                            <h5 style={{padding: "5px"}}>
+                        <article className="card home-card" key={item._id}>
+                            <h5 className="post-head">
                                 <Link to={item.postedBy !== state._id ? `/profile/${item.postedBy}` : `/profile`} >
                                     <span>
                                         {/* <img 
-                                            style={{ width: "35px", height:"35px", float:"left", borderRadius: "50%", marginRight: "15px"}}
+                                            className="post-avatar"
                                             src={item.postedBy.pic} alt="hello"
                                         /> */}
                                         <img 
-                                            style={{ width: "35px", height:"35px", float:"left", borderRadius: "50%", marginRight: "15px"}}
+                                            className="post-avatar"
                                             src={user.pic} alt="hello"
                                         />
                                     </span>
-                                    {/* <span className="white-text white-hover">{item.postedBy.name}</span> */}
-                                    <span className="white-text white-hover">{user.name}</span>
+                                    {/* <span className="post-author">{item.postedBy.name}</span> */}
+                                    <span className="post-author">{user.name}</span>
                                 </Link>
                                 {
                                     item.postedBy == state._id
                                     && 
                                     <i
-                                        className="material-icons white-text"
-                                        style={{float: "right"}}
+                                        className="material-icons post-delete"
+                                        title="Delete post"
                                         onClick= {() => {deletePost(item._id)}}
                                     >delete</i>
                                 }
@@ -300,39 +286,39 @@ const Profile = () => {
                             {/* <div className="card-image">
                                 <img src={item.photo} />
                             </div> */}
-                            <div className="card-content white-text">
-                                <h6><b>{item.title}</b></h6>
-                                <p>{item.body}</p>
+                            <div className="card-content post-body">
+                                <h6 className="post-title"><b>{item.title}</b></h6>
+                                <p className="post-text">{item.body}</p>
                                 
                                 
                             </div>
-                            <div className="card-image" style={{marginTop: "0.5rem"}}>
+                            <div className="card-image post-media">
                                 <img src={item.photo} alt="" style={{objectFit: "cover"}} />
                             </div>
-                            <div className="card-content white-text">
-                                <h6 style={{display:"inline-block"}}>{item.likes.length} likes</h6>
+                            <div className="card-content post-footer">
+                                <h6 className="post-likes">{item.likes.length} likes</h6>
                                 {/* <i className="material-icons" style={{ color: "red" }}>favorite</i> */}
                                 {
                                     item.likes.includes(state._id)
                                     ?
                                     <i
-                                    className="material-icons"
-                                    style={{display:"inline", position: "relative", top: "5px", marginLeft: "5px"}}
+                                    className="material-icons like-btn is-liked"
+                                    title="Unlike"
                                     onClick={() => { unlikePost(item._id) }}
                                     >thumb_down</i>
                                     :
                                     <i
-                                    className="material-icons"
-                                    style={{display:"inline", position: "relative", top: "5px", marginLeft: "5px"}}
+                                    className="material-icons like-btn"
+                                    title="Like"
                                     onClick={() => { likePost(item._id) }}
                                     >thumb_up</i>
                                 }
                                 {
                                     item.comments.map( record => {
                                         return (
-                                            <h6 key={record._id}>
+                                            <h6 key={record._id} className="comment">
                                                 <Link to={record.postedBy._id !== state._id ? `/profile/${record.postedBy._id}` : `/profile`} >
-                                                <span style={{fontWeight:"700", marginRight:"5px"}} className="white-text white-hover">
+                                                <span className="comment-author">
                                                     {record.postedBy.name}
                                                 </span>
                                                 </Link>
@@ -348,17 +334,17 @@ const Profile = () => {
                                         e.target[0].value = null
                                     }}
                                 >
-                                    <input type="text" className="input-white validate" placeholder="write a comment" />
+                                    <input type="text" className="input-white validate comment-input" placeholder="write a comment" />
                                 </form>
                             </div>
-                        </div>
+                        </article>
                     )
                 })
             }
             </div>
         </div>
 
-        : <h3 className="white-text">Loading...</h3>
+        : <h3 className="page-loading">Loading...</h3>
         }
         </>
     )

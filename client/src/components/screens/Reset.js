@@ -35,9 +35,9 @@ const Reset = () => {
     }
 
     return (
-        <div className="mycard ">
-            <div className="card auth-card input-field grey darken-4 white-text">
-                <h2 style={{marginTop: "-1rem"}} >Social Network</h2>
+        <div className="mycard auth-page">
+            <div className="card auth-card input-field">
+                <h2 className="auth-title">Social Network</h2>
                 <input
                     text="text"
                     id="input-email"
@@ -48,7 +48,7 @@ const Reset = () => {
                 />
                 
                 <button
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1 blue-button"
+                    className="btn waves-effect waves-light btn-primary auth-btn"
                     onClick={PostData}
                 >Reset Password</button>
                 

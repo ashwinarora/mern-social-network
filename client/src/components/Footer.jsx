@@ -5,9 +5,9 @@ function Footer() {
     return (
         // <nav style={{ position: "fixed", bottom: "0", left:"0", right:"0", zIndex: "100" }}>
         <nav style={{ zIndex: "100", position:"absolute", bottom:"0" }}>
-            <div className="nav-wrapper grey darken-4 footer">
+            <div className="nav-wrapper footer">
                 <div className="logo-div">
-                    <div>Developed By: </div>
+                    <div className="footer-label">Developed By: </div>
                     <a className="logo-div" href="https://ashwinarora.com/" target="_blank">
                         <img className="logo-image" src={myLogo} alt="Ashwin Arora" />
                     </a>

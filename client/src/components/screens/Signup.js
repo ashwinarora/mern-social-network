@@ -76,9 +76,9 @@ const Signup = () => {
     }
 
     return (
-        <div className="mycard">
-            <div className="card auth-card input-field grey darken-4 white-text">
-                <h2 style={{marginTop: "-1rem"}}>Social Network</h2>
+        <div className="mycard auth-page">
+            <div className="card auth-card input-field">
+                <h2 className="auth-title">Social Network</h2>
                 <input
                     text="text"
                     placeholder="Name"
@@ -102,19 +102,19 @@ const Signup = () => {
                     onChange={(e) => {setPassword(e.target.value)}} 
                 />
                 <div className="file-field input-field">
-                    <div className="btn #64b5f6 blue darken-1">
+                    <div className="btn btn-secondary">
                         <span>Upload Image</span>
                         <input type="file" className="input-white validate" onChange={(e) => { setImage(e.target.files[0]) }} />
                     </div>
                     <div className="file-path-wrapper">
-                        <input className="file-path validate input-white" type="text" />
+                        <input className="file-path validate input-white" type="text" placeholder="Profile photo (optional)" />
                     </div>
                 </div>
                 <button
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                    className="btn waves-effect waves-light btn-primary auth-btn"
                     onClick={PostData}
                 >Sign Up</button>
-                <h6><Link to="/signin">Already have an account?</Link></h6>
+                <h6 className="auth-link"><Link to="/signin">Already have an account?</Link></h6>
             </div>
             <Helpbox />
         </div>
