@@ -43,9 +43,9 @@ const Signin = () => {
     }
 
     return (
-        <div className="mycard ">
-            <div className="card auth-card input-field grey darken-4 white-text">
-                <h2 style={{marginTop: "-1rem"}}>Social Network</h2>
+        <div className="mycard auth-page">
+            <div className="card auth-card input-field">
+                <h2 className="auth-title">Social Network</h2>
                 <input
                     text="text"
                     id="input-email"
@@ -63,11 +63,11 @@ const Signin = () => {
                     onChange={(e) => { setPassword(e.target.value) }}
                 />
                 <button
-                    className="btn waves-effect waves-light #64b5f6 blue darken-1 blue-button"
+                    className="btn waves-effect waves-light btn-primary auth-btn"
                     onClick={PostData}
                 >Sign In</button>
-                <h6><Link to="/reset">Forgot Password?</Link></h6>
-                <h6><Link to="/signup">Create a new Account</Link></h6>
+                <h6 className="auth-link"><Link to="/reset">Forgot Password?</Link></h6>
+                <h6 className="auth-link"><Link to="/signup">Create a new Account</Link></h6>
             </div>
             <Helpbox />
         </div>

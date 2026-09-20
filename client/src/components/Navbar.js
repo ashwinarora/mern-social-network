@@ -21,16 +21,16 @@ const NavBar = () => {
                 <li key="12">
                     <a className="logo-div" href="https://ashwinarora.com/" target="_blank">
                         Developer Portfolio
-                        <svg style={{width: '2rem', height:"2rem"}} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        <svg className="nav-ext-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </a>
                 </li>,
-                <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{marginLeft: "1rem", marginRight: "1rem"}}>search</i></li>,
+                <li key="1"><i data-target="modal1" className="material-icons modal-trigger nav-search" title="Search users">search</i></li>,
                 <li key="2"><Link to="/profile">{state.name}</Link></li>,
                 <li key="3"><Link to="/create">New Post</Link></li>,
                 <li key="4"><Link to="/myFollowersPosts">Followed</Link></li>,
                 <li key="5">
                     <button
-                        className="btn waves-effect waves-light #64b5f6 blue-button"
+                        className="btn waves-effect waves-light btn-primary nav-logout"
                         onClick={() => {
                             localStorage.clear()
                             dispatch({type: 'CLEAR'})
@@ -45,7 +45,7 @@ const NavBar = () => {
                 <li key="12">
                     <a className="logo-div" href="https://ashwinarora.com/" target="_blank">
                         Developer Portfolio
-                        <svg style={{width: '2rem', height:"2rem"}} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        <svg className="nav-ext-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </a>
                 </li>,
                 <li key="6"><Link to="/signin">Sign In</Link></li>,
@@ -74,25 +74,25 @@ const NavBar = () => {
 
     return (
         <nav style={{position:"sticky", top:"0", zIndex:"100"}}>
-            <div className="nav-wrapper grey darken-4">
-                <Link to={state? '/' : '/signin'} className="brand-logo left white-text" style={{marginLeft: "1rem"}}>Social Network</Link>
-                <ul id="nav-mobile" className="right white-text white-hover" style={{marginRight: "1rem"}}>
+            <div className="nav-wrapper">
+                <Link to={state? '/' : '/signin'} className="brand-logo left"><span className="brand-mark" aria-hidden="true"></span>Social Network</Link>
+                <ul id="nav-mobile" className="right nav-links">
                     {renderList()}
                 </ul>
             </div>
-            <div id="modal1" className={`${!state ? 'hidden' : '' } modal`} ref={searchModal} style={{color:"black"}}>
-                <div className="modal-content grey darken-4">
+            <div id="modal1" className={`${!state ? 'hidden' : '' } modal search-modal`} ref={searchModal}>
+                <div className="modal-content">
                     <form autoComplete="off">
                         <input
                             type="text"
-                            className="white-text"
+                            className="search-input"
                             placeholder="Search User Email"
                             autoComplete="off"
                             value={search}
                             onChange={(e)=>fetchUsers(e.target.value)}
                         />
                     </form>
-                    <ul className="collection" style={{display: "flex", flexDirection: "column"}}>
+                    <ul className="collection search-results">
                         {userDetails.map(item=>{
                             return (
                                 <Link
@@ -103,20 +103,20 @@ const NavBar = () => {
                                         setSearch('')
                                         setUserDetails([])
                                     }}>
-                                    <li className="collection-item grey darken-4 white-hover" style={{display: "flex", justifyContent: "start", alignItems: "center"}}>
+                                    <li className="collection-item search-item">
                                         <img 
-                                            style={{ width: "35px", height:"35px", float:"left", borderRadius: "50%", marginRight: "15px", objectFit: "cover"}}
+                                            className="post-avatar"
                                             src={item.pic} alt="hello"
                                         />
-                                        <b style={{marginRight:"1rem"}}>{item.name}</b> {item.email}
+                                        <b className="search-name">{item.name}</b> <span className="search-email">{item.email}</span>
                                     </li>
                                 </Link>
                             )
                         })}
                     </ul>
                 </div>
-                <div className="modal-footer grey darken-4">
-                    <button className="modal-close waves-effect waves-green btn-flat white-text white-hover" onClick={()=>setSearch('')}>Close</button>
+                <div className="modal-footer">
+                    <button className="modal-close waves-effect btn-flat" onClick={()=>setSearch('')}>Close</button>
                 </div>
             </div>
         </nav>

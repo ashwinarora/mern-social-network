@@ -83,38 +83,34 @@ const CreatePost = () => {
     }
 
     return (
-        <div className="card input-filed grey darken-4" style={{
-            margin: "30px auto",
-            maxWidth: "500px",
-            padding: "20px",
-            textAlign: "center"
-        }}>
+        <div className="card input-filed create-card">
+            <h5 className="create-title">Create a post</h5>
             <input
                 type="text"
-                placeholder="title"
+                placeholder="Title"
                 className="input-white validate"
                 value={title}
                 onChange={(e) => { setTitle(e.target.value) }}
             />
             <input
                 type="text"
-                placeholder="body"
+                placeholder="What's on your mind?"
                 className="input-white validate"
                 value={post}
                 onChange={(e) => { setPost(e.target.value) }}
             />
             <div className="file-field input-field">
-                <div className="btn #64b5f6 blue darken-1">
+                <div className="btn btn-secondary">
                     <span>Upload Image</span>
                     {/* <input type="file" onChange={(e) => {console.log(e.target.files[0])}}/> */}
                     <input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
                 </div>
                 <div className="file-path-wrapper">
-                    <input className="file-path validate white-text" type="text" />
+                    <input className="file-path validate" type="text" placeholder="Add a photo (optional)" />
                 </div>
             </div>
             <button
-                className="btn waves-effect waves-light #64b5f6 blue darken-1"
+                className="btn waves-effect waves-light btn-primary create-btn"
                 onClick={postDetails}
             >Submit Post</button>
         </div>
