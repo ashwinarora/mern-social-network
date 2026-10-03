@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serverstart": "nodemon ./app.js",
     "start": "node app.js",
+    "check:no-contact": "node scripts/check-no-contact.js",
     "railway-build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && CI=false npm run build --prefix client"
   },
   "author": "",

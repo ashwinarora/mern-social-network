@@ -14,6 +14,7 @@ import Newpassword from './components/screens/Newpassword'
 // import HireTheDev from './components/screens/HireTheDev'
 import Footer from './components/Footer.jsx'
 import { reducer, initialState } from './reducers/userReducers'
+import { NO_CONTACT } from './noContact'
 
 export const UserContext = createContext()
 
@@ -26,7 +27,7 @@ const Routing = () => {
 			dispatch({ type: 'USER', payload: user })
 			// history.push('/')
 		} else {
-			if(!history.location.pathname.startsWith('/reset')) history.push('/signin')
+			if(NO_CONTACT || !history.location.pathname.startsWith('/reset')) history.push('/signin')
 		}
 	}, [])
 	
@@ -53,12 +54,12 @@ const Routing = () => {
 			<Route exact path="/myFollowersPosts">
 				<FollowedPosts />
 			</Route>
-			<Route exact path="/reset">
+			{NO_CONTACT ? null : <Route exact path="/reset">
 				<Reset />
-			</Route>
-			<Route exact path="/reset/:token">
+			</Route>}
+			{NO_CONTACT ? null : <Route exact path="/reset/:token">
 				<Newpassword />
-			</Route>
+			</Route>}
 			{/* <Route exact path="/hire-the-developer">
 				<HireTheDev />
 			</Route> */}
@@ -73,7 +74,7 @@ function App() {
 			<BrowserRouter>
 				<NavBar />
 				<Routing />
-				<Footer />
+				{NO_CONTACT ? null : <Footer />}
 			</BrowserRouter>
 		</UserContext.Provider>
 	);

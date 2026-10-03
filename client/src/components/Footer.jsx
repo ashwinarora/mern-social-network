@@ -1,5 +1,5 @@
 import React from 'react'
-import myLogo from '../assets/myLogo.png'
+import { developerLogo as myLogo } from '../noContact'
 
 function Footer() {
     return (

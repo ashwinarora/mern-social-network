@@ -13,8 +13,8 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start --openssl-legacy-provider",
-    "build": "react-scripts build --openssl-legacy-provider",
+    "start": "node scripts/cra.js start --openssl-legacy-provider",
+    "build": "node scripts/cra.js build --openssl-legacy-provider",
     "test": "react-scripts test --openssl-legacy-provider",
     "eject": "react-scripts eject"
   },
