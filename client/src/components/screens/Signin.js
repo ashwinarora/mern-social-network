@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../../App'
 import M from 'materialize-css'
 import Helpbox from './Helpbox'
+import { NO_CONTACT } from '../../noContact'
 
 const Signin = () => {
     const { state, dispatch } = useContext(UserContext)
@@ -66,7 +67,7 @@ const Signin = () => {
                     className="btn waves-effect waves-light #64b5f6 blue darken-1 blue-button"
                     onClick={PostData}
                 >Sign In</button>
-                <h6><Link to="/reset">Forgot Password?</Link></h6>
+                {NO_CONTACT ? null : <h6><Link to="/reset">Forgot Password?</Link></h6>}
                 <h6><Link to="/signup">Create a new Account</Link></h6>
             </div>
             <Helpbox />

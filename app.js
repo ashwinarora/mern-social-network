@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
+const { NO_CONTACT, seedGuest } = require('./noContact')
 const PORT = process.env.PORT || 5000
 const mongoose = require('mongoose')
 const { MONGO_URI } = require('./keys')
@@ -12,6 +13,7 @@ mongoose.connect(MONGO_URI, {
 
 mongoose.connection.on('connected', () => {
     console.log('Successfully Connected to MongoDB')
+    if (NO_CONTACT) seedGuest().catch(err => console.log('Could not create the guest account', err))
 })
 
 mongoose.connection.on('error', () => {
@@ -20,6 +22,13 @@ mongoose.connection.on('error', () => {
 
 require('./models/user')
 require('./models/post')
+
+if (NO_CONTACT) {
+    app.use((req, res, next) => {
+        res.set('X-Robots-Tag', 'noindex, nofollow')
+        next()
+    })
+}
 
 app.use(express.json())
 app.use(require('./routes/auth'))

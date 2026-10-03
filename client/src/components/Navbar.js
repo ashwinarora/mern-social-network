@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../App'
 import M from 'materialize-css'
+import { NO_CONTACT } from '../noContact'
 
 const NavBar = () => {
     const history = useHistory()
@@ -18,7 +19,7 @@ const NavBar = () => {
         if(state){
             return [
                 // <li key="11"><Link to="/about">About</Link></li>,
-                <li key="12">
+                NO_CONTACT ? null : <li key="12">
                     <a className="logo-div" href="https://ashwinarora.com/" target="_blank">
                         Developer Portfolio
                         <svg style={{width: '2rem', height:"2rem"}} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -42,7 +43,7 @@ const NavBar = () => {
         } else {
             return [
                 // <li key="11"><Link to="/about">About</Link></li>,
-                <li key="12">
+                NO_CONTACT ? null : <li key="12">
                     <a className="logo-div" href="https://ashwinarora.com/" target="_blank">
                         Developer Portfolio
                         <svg style={{width: '2rem', height:"2rem"}} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>

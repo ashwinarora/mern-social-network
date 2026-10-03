@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { NO_CONTACT } from './noContact';
+
+// index.html reserves 6rem under #root for the footer, which a no-contact build does not have.
+if (NO_CONTACT) document.getElementById('root').style.paddingBottom = '2rem';
 
 ReactDOM.render(
   <React.StrictMode>

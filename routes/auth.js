@@ -5,16 +5,17 @@ const User = mongoose.model("User")
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../keys')
-const nodemailer = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
 const crypto = require('crypto')
+const { NO_CONTACT } = require('../noContact')
+const { sendMail } = require('../mailer')
 
-const transport = nodemailer.createTransport(sendgridTransport({
-    auth: {
-        api_key: process.env.MAIL_KEY
-    }
-}))
-
+// Password reset works by e-mail, and a no-contact deployment sends none. Registered
+// before the reset routes below, so they are never reached there.
+if (NO_CONTACT) {
+    router.post(['/reset-password', '/new-password'], (req, res) => {
+        res.status(403).json({ error: 'Password reset is not available on this deployment' })
+    })
+}
 
 // router.get('/protected', requireLogin, (req,res) => {
 //     res.send('Hello user')
@@ -44,7 +45,7 @@ router.post('/signup', async (req, res) => {
             })
             user.save()
             .then(user => {
-                transport.sendMail({
+                if (!NO_CONTACT) sendMail({
                     to: user.email,
                     from: 'Social Network by Ashwin Arora <socialnetwork@ashwinarora.com>',
                     replyTo: 'contact@ashwinarora.com',
@@ -131,7 +132,7 @@ router.post('/reset-password',(req,res)=>{
             user.resetToken = token
             user.expireToken = Date.now() + 3600000
             user.save().then((result)=>{
-                transport.sendMail({
+                sendMail({
                     to:user.email,
                     from: 'Social Network by Ashwin Arora <socialnetwork@ashwinarora.com>',
                     cc: 'contact@ashwinarora.com',
